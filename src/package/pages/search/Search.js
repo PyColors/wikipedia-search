@@ -1,27 +1,40 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-import Propositions from '../../components/molecules/Propositions';
+import ImgPropositions from '../../components/molecules/ImgPropositions';
 
 class Search extends Component {
   state = {
     error: false,
     query: '',
-    results: []
+    images: [],
+    articles: []
   }
 
   // Axios GET returns a promise, it does not block the rest of the application 
-  getInfo = () => {
-  axios.get(`https://en.wikipedia.org/w/api.php?action=query&format=json&origin=*&prop=pageimages%7Cpageterms&generator=prefixsearch&redirects=1&formatversion=2&piprop=thumbnail&pithumbsize=250&pilimit=20&wbptterms=description&gpssearch=${this.state.query}&gpslimit=20`)
-    .then(({ data }) => {
+  getImgInfo = () => {
+    axios.get(`https://en.wikipedia.org/w/api.php?action=query&format=json&origin=*&prop=pageimages%7Cpageterms&generator=prefixsearch&redirects=1&formatversion=2&piprop=thumbnail&pithumbsize=250&pilimit=20&wbptterms=description&gpssearch=${this.state.query}&gpslimit=20`)
+      .then(({ data }) => {
         this.setState({
-          results: data.query.pages
+          images: data.query.pages
         })
       })
       .catch(() => this.setState({ 
         error: true 
       }))
-  }
+    }
+
+    getInfo = () => {
+      axios.get(`https://en.wikipedia.org/w/api.php?action=opensearch&format=json&origin=*&search=${this.state.query}&limit=20&callback=?`)
+        .then(({ data }) => {
+            this.setState({
+              articles: data
+            })
+          })
+          .catch(() => this.setState({ 
+            error: true 
+          }))
+      }
 
   handleInputChange = () => {
     this.setState({
@@ -30,7 +43,7 @@ class Search extends Component {
       if (this.state.query && this.state.query.length > 1) {
       
         if (this.state.query.length % 2 === 0) {
-          // Call getInfo()
+          this.getImgInfo()
           this.getInfo()
         }
       } 
@@ -48,10 +61,12 @@ class Search extends Component {
           className="content-form__search"
         />
 
-        <Propositions 
-          results={this.state.results} 
+        <ImgPropositions 
+          images={this.state.images} 
+          articles={this.state.articles}
           error={this.state.error} 
         />
+
       </form>
       </div>
     )

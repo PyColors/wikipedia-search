@@ -7,10 +7,14 @@ const ImgPropositions = ({ images }) => {
   const imagesList = images.length ? (
     images.map(img => {
       return (
-        <figure key={img.pageid}>
-          <img src={img.thumbnail ? img.thumbnail.source : defaultImg} alt={img.title} />
-          <figcaption>{img.title}</figcaption>
-        </figure>
+        <section key={img.pageid}>
+          <figure>
+            <a href={`https://en.wikipedia.org/wiki/${img.title}`} target="_blank">
+              <img src={img.thumbnail ? img.thumbnail.source : defaultImg} alt={img.title} />
+            </a>
+            <figcaption>{img.title}</figcaption>
+          </figure>
+        </section>
       )
     })
   ) : (

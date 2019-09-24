@@ -15,9 +15,9 @@ class App extends Component {
       <main>
         <Appbar className="app-bar">
         <div className="mui-container">
-          <table>
-            <tr className="mui--appbar-height">
-              <td className="mui--text-title">
+          <section>
+            <div className="mui--appbar-height app-bar__logo-box">
+              <div className="mui--text-title">
               <a href="https://www.wikipedia.org/" target="_blank">
                   <img
                     className="app-bar__brand-logo"
@@ -25,12 +25,12 @@ class App extends Component {
                     alt="wikipedia logo"
                   />
                 </a>
-              </td>
-              <td className="mui--text-right app-bar__title"> 
+              </div>
+              <div className="mui--text-right app-bar__title"> 
                 Wikipedia
-              </td>
-            </tr>
-          </table>
+              </div>
+            </div>
+          </section>
         </div>
 
         </Appbar>

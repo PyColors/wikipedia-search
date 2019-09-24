@@ -8,7 +8,7 @@ const ImgPropositions = ({ images }) => {
     images.map(img => {
       return (
         <section key={img.pageid}>
-          <figure>
+          <figure className="content-proposition__img-box">
             <a href={`https://en.wikipedia.org/wiki/${img.title}`} target="_blank">
               <img src={img.thumbnail ? img.thumbnail.source : defaultImg} alt={img.title} />
             </a>

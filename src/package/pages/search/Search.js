@@ -2,13 +2,18 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 import ImgPropositions from '../../components/molecules/ImgPropositions';
+import InfosPropositions from '../../components/molecules/InfosPropositions';
+
+import Container from 'muicss/lib/react/container';
+import Row from 'muicss/lib/react/row';
+import Col from 'muicss/lib/react/col';
 
 class Search extends Component {
   state = {
     error: false,
     query: '',
     images: [],
-    articles: []
+    articles: ''
   }
 
   // Axios GET returns a promise, it does not block the rest of the application 
@@ -24,17 +29,17 @@ class Search extends Component {
       }))
     }
 
-    getInfo = () => {
-      axios.get(`https://en.wikipedia.org/w/api.php?action=opensearch&format=json&origin=*&search=${this.state.query}&limit=20&callback=?`)
-        .then(({ data }) => {
-            this.setState({
-              articles: data
-            })
+  getInfo = () => {
+    axios.get(`https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${this.state.query}&prop=info&inprop=url&utf8=&format=json&origin=*&sroffset=20`)
+      .then(({ data }) => {
+          this.setState({
+            articles: data.query.search
           })
-          .catch(() => this.setState({ 
-            error: true 
-          }))
-      }
+        })
+        .catch(() => this.setState({ 
+          error: true 
+        }))
+    }
 
   handleInputChange = () => {
     this.setState({
@@ -63,6 +68,10 @@ class Search extends Component {
 
         <ImgPropositions 
           images={this.state.images} 
+          error={this.state.error} 
+        />
+
+        <InfosPropositions 
           articles={this.state.articles}
           error={this.state.error} 
         />

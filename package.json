@@ -9,10 +9,10 @@
     "build:dev": "webpack-dev-server --env dev --mode none",
     "build:prod": "webpack --browserslist --env prod --mode production"
   },
-  "keywords": [],
-  "author": "Py Colors",
-  "license": "ISC",
-  "devDependencies": {
+    "keywords": [],
+    "author": "Py Colors",
+    "license": "ISC",
+    "devDependencies": {
     "@babel/core": "^7.5.5",
     "@babel/plugin-proposal-class-properties": "^7.5.5",
     "@babel/preset-env": "^7.5.5",

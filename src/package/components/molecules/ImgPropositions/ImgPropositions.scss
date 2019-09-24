@@ -6,4 +6,14 @@
     color: #54595d;
   }
 
+  &__img-box {
+    vertical-align: middle;
+    display: inline-block;
+
+    img {
+      vertical-align: middle;
+      display: inline-block;
+    }
+  }
+
 }

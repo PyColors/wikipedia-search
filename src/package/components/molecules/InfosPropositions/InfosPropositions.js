@@ -6,9 +6,9 @@ const InfosPropositions = ({ articles }) => {
     
     articles.map(article => {
       return (
-        <p key={article.pageid}>
+        <div key={article.pageid}>
            <p>{article.title}</p>
-        </p>
+        </div>
       )
     })
   ) : (

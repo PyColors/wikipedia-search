@@ -18,7 +18,7 @@ const ImgPropositions = ({ images }) => {
       )
     })
   ) : (
-    <p className="content-proposition__information">No images have been found yet</p>
+    null
   )
 
   return (

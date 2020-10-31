@@ -6,7 +6,8 @@ node_js:
   - 10
   
 script:
-  - npm prod
+  - npm install
+  - npm build:prod
 
 cache:
   yarn: true
